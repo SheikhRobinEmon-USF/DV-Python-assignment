@@ -12,8 +12,7 @@ The five notebooks cover Python requirements 1–6. Requirement 7 additionally n
 6. Restore the full original case files: `python tools/prepare_data.py`. The script verifies original byte sizes and SHA-256 hashes. You need about 1 GB of free disk for the inputs and rebuilt outputs. No sampling, truncation, or lossy compression is used.
 7. Start Jupyter: `python -m jupyterlab`. Open each notebook in `notebooks/`, select the assignment environment, and **Restart Kernel and Run All Cells**. Alternatively, execute all five: `python tools/run_notebooks.py`.
 8. Check the figures, numeric tables, and source reconciliation. Exports are saved as PNG (300 dpi), PDF, and SVG under `figures/`.
-9. Run the missing-value audit: `python tools/audit_missing_values.py`. Read `reports/MISSING_VALUES.md`; preview labels say **Not listed** for introduced gaps without altering the numeric data.
-10. Run the behavior checks: `python -m unittest discover -s tests -v`.
+9. Run the behavior checks: `python -m unittest discover -s tests -v`.
 
 You can also run each script in `scripts/` individually from the repository root. Script 05 recreates the complete case-record CSV and county/day source before plotting. The scripts resolve paths relative to the repository.
 

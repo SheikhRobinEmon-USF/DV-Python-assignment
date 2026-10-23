@@ -14,7 +14,7 @@ This is a deliverable audit, not a guaranteed professor's grade. The supplied ru
 
 **Submission status:** 45 of the 60 listed points have complete source-backed deliverables; no grade is assigned to the outstanding Tableau requirement. It would be misleading to label the entire assignment 100/100 now.
 
-All five notebooks executed from top to bottom with the actual inputs and saved figure outputs. Nineteen behavior checks passed, with no failed or skipped tests. Figure exports were visually inspected. The Python ZIP was extracted into a different directory, both full original CSVs were restored with verified hashes, and all five notebooks passed there as well. `reports/validation.json` records source hashes and counts; `reports/tabpy_smoke.json` records the actual server response on boundary-test values.
+All five notebooks executed from top to bottom with the actual inputs and saved figure outputs. Sixteen behavior checks passed, with no failed or skipped tests. Figure exports were visually inspected. The Python ZIP was extracted into a different directory, both full original CSVs were restored with verified hashes, and all five notebooks passed there as well. `reports/validation.json` records source hashes and counts; `reports/tabpy_smoke.json` records the actual server response on boundary-test values.
 
 ## Source decisions documented for grading
 
@@ -30,7 +30,3 @@ All five notebooks executed from top to bottom with the actual inputs and saved 
 ## Final action needed
 
 Provide the Module 3 `.twbx`, follow `tableau/TABLEAU_STEPS.md` on a computer with Tableau Desktop, verify the Python connection and reopened chart, and save the final workbook. Only then run the final-submission packager and upload the ZIP to the course assignment box.
-
-## Missing-value update
-
-Notebooks 02, 03, and 05 now show a source-versus-inserted-date null audit and label preview gaps **Not listed**. All five notebooks were re-executed successfully after this change. No source observations or moving averages were imputed. See `reports/MISSING_VALUES.md`.

@@ -1,5 +1,5 @@
 {
-  "tested_utc": "2026-10-23T16:15:01.470099+00:00",
+  "tested_utc": "2026-10-23T01:23:32.661318+00:00",
   "inputs": {
     "data/2018 Data.xlsx": {
       "bytes": 13720,
@@ -53,21 +53,10 @@
   "notebooks": "All 5 executed successfully on actual course data; rendered figure output saved.",
   "unittest": {
     "command": "python -m unittest discover -s tests -v",
-    "tests_run": 19,
-    "passed": 19,
+    "tests_run": 16,
+    "passed": 16,
     "failed": 0,
     "skipped": 0
   },
-  "tableau_desktop": "Not tested: original Module 3 workbook missing.",
-  "missing_value_audit": {
-    "required_source_key_nulls": 0,
-    "null_plotted_values_on_observed_dates": 0,
-    "inserted_calendar_gaps": {
-      "Pasco": 4,
-      "Hillsborough": 1,
-      "Broward": 24,
-      "Palm Beach": 37
-    },
-    "treatment": "Preserve numeric missing values and plotted gaps; label preview cells Not listed; no imputation."
-  }
+  "tableau_desktop": "Not tested: original Module 3 workbook missing."
 }

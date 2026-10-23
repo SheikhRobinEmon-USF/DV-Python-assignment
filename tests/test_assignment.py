@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from dv_assignment.data import ROOT, InputError, config, course_county, course_sales, rebuilt_county, compare_sources, audit_daily_series, daily_preview
+from dv_assignment.data import ROOT, InputError, config, course_county, course_sales, rebuilt_county, compare_sources
 from dv_assignment.profitability import classify_products, TABLEAU_SCRIPT
 from dv_assignment import charts
 
@@ -134,31 +134,6 @@ class CourseDataTests(unittest.TestCase):
         self.assertIn('Broward',fig.axes[0].get_title(loc='left'))
         self.assertIn('Palm Beach',fig.axes[2].get_title(loc='left'))
         plt.close(fig)
-
-
-class MissingValueAuditTests(unittest.TestCase):
-    def test_audit_attributes_nulls_to_inserted_dates(self):
-        settings=config()
-        for county,expected in [('Pasco',4),('Hillsborough',1)]:
-            frame=course_county(settings['covid'],county)
-            summary,gaps=audit_daily_series(frame)
-            self.assertTrue(summary.nulls_on_observed_dates.eq(0).all())
-            self.assertTrue(summary.total_display_nulls.eq(expected).all())
-            self.assertEqual(len(gaps),expected)
-
-    def test_audit_does_not_hide_an_observed_value_null(self):
-        frame=course_county(config()['covid'],'Pasco')
-        frame.loc['2020-03-01','daily_cases']=np.nan
-        summary,_=audit_daily_series(frame)
-        self.assertEqual(summary.loc[summary.field.eq('daily_cases'),'nulls_on_observed_dates'].iloc[0],1)
-
-    def test_preview_changes_labels_without_imputation(self):
-        frame=course_county(config()['covid'],'Pasco')
-        original=frame.copy(deep=True)
-        preview=daily_preview(frame)
-        self.assertIn('Not listed',preview.to_html())
-        pd.testing.assert_frame_equal(frame,original)
-        self.assertEqual(frame.daily_cases.isna().sum(),4)
 
 
 if __name__=='__main__':

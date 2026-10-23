@@ -80,11 +80,10 @@ def course_county(spec, county, root=ROOT):
         raise InputError('Supplied moving average no longer matches the documented source calculation.')
     dates = pd.date_range(frame.index.min(),frame.index.max(),freq='D',name='date')
     missing = len(dates)-len(frame)
-    unlisted_dates = dates.difference(frame.index).strftime('%Y-%m-%d').tolist()
     frame = frame.reindex(dates)  # Visible gaps instead of inventing zero cases.
     frame.attrs.update({'county':county,'state':'Florida',
         'average_definition':f"Supplied {spec['average_window_observations']}-observation trailing average",
-        'missing_calendar_days':missing,'unlisted_dates':unlisted_dates,'average_supplied':True,
+        'missing_calendar_days':missing,'average_supplied':True,
         'negative_daily_revisions':0,'source':Path(spec['path']).name,
         'average_validation':'All supplied values reproduced within source rounding precision'})
     return frame
@@ -205,9 +204,6 @@ def rebuilt_county(frame, county, average_spec):
     subset=frame.loc[frame['county'].str.casefold().eq(county.casefold())].copy()
     if subset.empty or subset.duplicated('date').any():
         raise InputError(f'No unique daily case series for {county}.')
-    if subset[['date','daily_cases']].isna().any().any():
-        raise InputError('Missing date or daily count in observed reconstructed rows.')
-    subset['daily_cases']=numeric(subset['daily_cases'],'daily_cases',False)
     subset=subset.set_index('date').sort_index()
     window=average_spec['window']
     if average_spec['basis']=='observed_rows':
@@ -216,10 +212,9 @@ def rebuilt_county(frame, county, average_spec):
         raise InputError('Configure and document an explicit average basis.')
     dates=pd.date_range(subset.index.min(),subset.index.max(),freq='D',name='date')
     missing=len(dates)-len(subset)
-    unlisted_dates=dates.difference(subset.index).strftime('%Y-%m-%d').tolist()
     subset=subset.reindex(dates)
     subset.attrs.update({'county':county,'state':'Florida','average_definition':f'{window}-observation trailing mean · partial initial windows',
-        'missing_calendar_days':missing,'unlisted_dates':unlisted_dates,'source':'2020 Cases only.csv + 2021 Cases only.csv',
+        'missing_calendar_days':missing,'source':'2020 Cases only.csv + 2021 Cases only.csv',
         'average_supplied':False,'negative_daily_revisions':0})
     return subset
 
@@ -236,39 +231,3 @@ def compare_sources(reconstructed, consolidated_spec):
         comparison['matches']=comparison['difference'].eq(0)
         comparisons.append(comparison.reset_index())
     return pd.concat(comparisons,ignore_index=True)
-
-
-def audit_daily_series(frame):
-    """Separate source-value nulls from dates explicitly inserted for display.
-
-    Pandas isna() detects NaN, None and pd.NA. No values are filled or dropped.
-    A date absent from an event-record list is not a missing field on a case row;
-    interpreting that absence as zero needs a reporting-completeness assumption.
-    """
-    fields=['daily_cases','moving_average']
-    if not set(fields).issubset(frame):
-        raise InputError('Audit needs both daily_cases and moving_average.')
-    if 'unlisted_dates' not in frame.attrs:
-        raise InputError('Audit needs date provenance from the county loader.')
-    dates=pd.DatetimeIndex(pd.to_datetime(frame.attrs['unlisted_dates']))
-    if not dates.isin(frame.index).all():
-        raise InputError('Inserted-date provenance does not match the display index.')
-    gap_mask=frame.index.isin(dates)
-    if frame.loc[gap_mask,fields].notna().any().any():
-        raise InputError('An inserted gap has been filled; record that treatment explicitly.')
-    rows=[]
-    for field in fields:
-        rows.append({'county':frame.attrs['county'],'field':field,
-                     'nulls_on_observed_dates':int(frame.loc[~gap_mask,field].isna().sum()),
-                     'inserted_unlisted_dates':int(gap_mask.sum()),
-                     'total_display_nulls':int(frame[field].isna().sum())})
-    gaps=pd.DataFrame({'county':[frame.attrs['county']]*len(dates),
-                       'date':dates.strftime('%Y-%m-%d'),
-                       'reason':['Date absent from the selected source; not automatically zero']*len(dates)})
-    return pd.DataFrame(rows),gaps
-
-
-def daily_preview(frame, rows=12):
-    """Readable table labels; underlying numeric NaNs and plotted gaps stay intact."""
-    return frame[['daily_cases','moving_average']].head(rows).style.format(
-        {'daily_cases':'{:,.0f}','moving_average':'{:,.2f}'},na_rep='Not listed')
