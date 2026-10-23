@@ -40,18 +40,27 @@ The daily series reveals short-term variation; the moving average makes the long
 **Source-specific detail:** the supplied average reproduces an **8-observation trailing mean**, current observation included, with partial initial windows. Hillsborough matches exactly; Pasco differs by no more than 0.05 because of displayed one-decimal rounding. It is not relabeled as a 7-day average.
 
 Daily dates absent from the sheet are reintroduced as **missing**, not zero. The original supplied average stays unchanged; the displayed lines have gaps for unlisted dates.'''),
-        n.v4.new_code_cell(bootstrap+'''from dv_assignment.data import course_county
+        n.v4.new_code_cell(bootstrap+'''from dv_assignment.data import course_county, audit_daily_series, daily_preview
 from dv_assignment import charts
 '''),
         n.v4.new_markdown_cell('''## Load and validate the actual course worksheet
 
 The loader checks dates, duplicate keys, numeric values, and every supplied moving average against its observed source formula. The code is in `dv_assignment/data.py`; the plotting code is in `dv_assignment/charts.py`.'''),
         n.v4.new_code_cell(f'''data = course_county(config()['covid'], '{county}')
-print(data.attrs)
-display(data.head(12))
+print({{key: value for key, value in data.attrs.items() if key != 'unlisted_dates'}})
+display(daily_preview(data))
 print(f"Observed days: {{data.daily_cases.notna().sum():,}}")
 print(f"Cases across listed dates: {{data.daily_cases.sum():,.0f}}")
 print(f"Unlisted calendar dates: {{data.attrs['missing_calendar_days']}}")'''),
+        n.v4.new_markdown_cell('''## Missing-value check and treatment
+
+`isna()` checks NaN, None and pandas NA. The audit separates null values on original observed dates from the additional calendar dates inserted for display. There are no missing case counts or supplied means on the original worksheet rows. The table preview labels inserted gaps **Not listed**; the underlying values remain missing. We do not replace them with zero, interpolate counts, or carry a previous mean into an unlisted date.'''),
+        n.v4.new_code_cell('''null_audit, unlisted_dates = audit_daily_series(data)
+display(null_audit)
+display(unlisted_dates)
+assert null_audit.nulls_on_observed_dates.eq(0).all()
+(ROOT / 'reports').mkdir(exist_ok=True)
+null_audit.to_csv(ROOT / 'reports' / f"{data.attrs['county'].lower()}_null_audit.csv", index=False)'''),
         n.v4.new_markdown_cell('''## Required visualization
 
 Blue and orange separate the series with strong contrast. The source note defines the moving average, the y-axis starts at zero, and date ticks remain readable across the complete period.'''),
@@ -107,7 +116,7 @@ write('05_reconstruct_covid_and_panels',[
 This notebook combines source reconstruction and the required `matplotlib.pyplot` **2 × 2** visualization to satisfy the instruction to submit five notebooks for the six Python requirements.
 
 Inspection confirmed **1,341,647 case records for 2020** and **938,226 for 2021**. `EventDate` falls entirely in the corresponding year, so the partitions do not overlap. Each yearly source has a unique record ID; 2020 calls it `ObjectId2`, and 2021 calls it `ObjectId`. The 2020 `OBJECTID` column is entirely empty and is removed only after checking that fact. All remaining source columns are retained in the combined case-record CSV, with source-file and source-year provenance. String missing-value representations are normalized by pandas; the original byte-for-byte files remain in the archive.'''),
- n.v4.new_code_cell(bootstrap+'''from dv_assignment.data import rebuild_case_records, rebuilt_county, compare_sources
+ n.v4.new_code_cell(bootstrap+'''from dv_assignment.data import rebuild_case_records, rebuilt_county, compare_sources, audit_daily_series, daily_preview
 from dv_assignment import charts
 import json
 '''),
@@ -131,8 +140,28 @@ The average policy is explicit in the configuration: an 8-observation trailing a
  n.v4.new_code_cell('''broward = rebuilt_county(source, 'Broward', settings['moving_average'])
 palm_beach = rebuilt_county(source, 'Palm Beach', settings['moving_average'])
 for county in [broward, palm_beach]:
-    print(county.attrs)
-    display(county[['daily_cases', 'moving_average']].head(10))'''),
+    print({key: value for key, value in county.attrs.items() if key != 'unlisted_dates'})
+    display(daily_preview(county, rows=10))'''),
+ n.v4.new_markdown_cell('''## Missing-value check and treatment
+
+Both original case files have complete county, event-date and nonempty record-ID fields. Grouped county/day counts also have no missing counts. The NaNs in the displayed series come from inserting dates with no matching case records. This is separate from the three missing `Case_` flags retained in the input.
+
+The audit below identifies every inserted date and verifies that no observed daily count or calculated mean is null. Previews say **Not listed** rather than displaying NaN. For this submission, preserve gaps and the documented observation-window mean. If the module explicitly guarantees complete case coverage and defines absent dates as zero, an alternative zero-filled daily series must recompute its mean on that calendar and disclose the changed definition; do not use a blanket `fillna(0)` on both columns.'''),
+ n.v4.new_code_cell('''import pandas as pd
+null_summaries = []
+gap_lists = []
+for county in [broward, palm_beach]:
+    summary, gaps = audit_daily_series(county)
+    null_summaries.append(summary)
+    gap_lists.append(gaps)
+null_audit = pd.concat(null_summaries, ignore_index=True)
+unlisted_dates = pd.concat(gap_lists, ignore_index=True)
+display(null_audit)
+display(unlisted_dates)
+assert null_audit.nulls_on_observed_dates.eq(0).all()
+(ROOT / 'reports').mkdir(exist_ok=True)
+null_audit.to_csv(ROOT / 'reports' / 'reconstructed_counties_null_audit.csv', index=False)
+unlisted_dates.to_csv(ROOT / 'reports' / 'reconstructed_counties_unlisted_dates.csv', index=False)'''),
  n.v4.new_markdown_cell('''## Required 2 × 2 figure
 
 | | Left column | Right column |

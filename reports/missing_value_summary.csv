@@ -1,0 +1,9 @@
+county,field,nulls_on_observed_dates,inserted_unlisted_dates,total_display_nulls
+Pasco,daily_cases,0,4,4
+Pasco,moving_average,0,4,4
+Hillsborough,daily_cases,0,1,1
+Hillsborough,moving_average,0,1,1
+Broward,daily_cases,0,24,24
+Broward,moving_average,0,24,24
+Palm Beach,daily_cases,0,37,37
+Palm Beach,moving_average,0,37,37

@@ -1,0 +1,58 @@
+file,sheet,field,rows,pandas_null_values
+2018 Data.xlsx,2018 Data,NAME,52,0
+2018 Data.xlsx,2018 Data,Unemployment Rate,52,0
+2018 Data.xlsx,2018 Data,Median Family Income,52,0
+2018 Data.xlsx,2018 Data,Mean Family Income,52,0
+2018 Data.xlsx,2018 Data,Per Capita Income,52,0
+2018 Data.xlsx,2018 Data,Perc with health Insurance,52,0
+2018 Data.xlsx,2018 Data,Perc Families below Poverty Line,52,0
+2018 Data.xlsx,2018 Data,Perc People below Poverty Line,52,0
+2018 Data.xlsx,2018 Data,Obesity Rates,52,0
+Combined.xlsx,Hillsborough,Unnamed: 0,370,0
+Combined.xlsx,Hillsborough,Hillsborough,370,0
+Combined.xlsx,Hillsborough,Moving Average Hillsborough along Day of Event Date,370,0
+Combined.xlsx,Pasco,Unnamed: 0,367,0
+Combined.xlsx,Pasco,Count of ObjectId (Pasco.csv),367,0
+Combined.xlsx,Pasco,Moving Average Pasco along Day of EventDate (Pasco.csv),367,0
+Combined.xlsx,Pinellas,Unnamed: 0,370,0
+Combined.xlsx,Pinellas,Pinellas,370,0
+Combined.xlsx,Pinellas,Moving Average Pinellas along Day of EventDate (Pinellas.csv),370,0
+Simplified Car Sales Data.xlsx,CarSalesData,Make,457,0
+Simplified Car Sales Data.xlsx,CarSalesData,CountryName,457,0
+Simplified Car Sales Data.xlsx,CarSalesData,SalePrice,457,0
+Simplified Car Sales Data.xlsx,CarSalesData,CostPrice,457,0
+Simplified Car Sales Data.xlsx,CarSalesData,LaborCost,457,0
+Simplified Car Sales Data.xlsx,CarSalesData,Color,457,0
+2020 Cases only.csv,CSV,OBJECTID,1341647,1341647
+2020 Cases only.csv,CSV,County,1341647,0
+2020 Cases only.csv,CSV,Age,1341647,1214
+2020 Cases only.csv,CSV,Age_group,1341647,0
+2020 Cases only.csv,CSV,Gender,1341647,0
+2020 Cases only.csv,CSV,Jurisdicti,1341647,0
+2020 Cases only.csv,CSV,Travel_rel,1341647,0
+2020 Cases only.csv,CSV,Origin,1341647,1311493
+2020 Cases only.csv,CSV,EDvisit,1341647,52060
+2020 Cases only.csv,CSV,Hospitaliz,1341647,57
+2020 Cases only.csv,CSV,Died,1341647,1314675
+2020 Cases only.csv,CSV,Case_,1341647,0
+2020 Cases only.csv,CSV,Contact,1341647,270845
+2020 Cases only.csv,CSV,Case1,1341647,0
+2020 Cases only.csv,CSV,EventDate,1341647,0
+2020 Cases only.csv,CSV,ChartDate,1341647,0
+2020 Cases only.csv,CSV,ObjectId2,1341647,0
+2021 Cases only.csv,CSV,County,938226,0
+2021 Cases only.csv,CSV,Age,938226,484
+2021 Cases only.csv,CSV,Age_group,938226,0
+2021 Cases only.csv,CSV,Gender,938226,0
+2021 Cases only.csv,CSV,Jurisdicti,938226,0
+2021 Cases only.csv,CSV,Travel_rel,938226,0
+2021 Cases only.csv,CSV,Origin,938226,919101
+2021 Cases only.csv,CSV,EDvisit,938226,27550
+2021 Cases only.csv,CSV,Hospitaliz,938226,1490
+2021 Cases only.csv,CSV,Died,938226,928266
+2021 Cases only.csv,CSV,Case_,938226,3
+2021 Cases only.csv,CSV,Contact,938226,199317
+2021 Cases only.csv,CSV,Case1,938226,0
+2021 Cases only.csv,CSV,EventDate,938226,0
+2021 Cases only.csv,CSV,ChartDate,938226,0
+2021 Cases only.csv,CSV,ObjectId,938226,0

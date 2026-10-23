@@ -38,6 +38,7 @@ For interactive use, start `python -m jupyterlab`. See [the submission guide](SU
 
 - All **2,279,873** case records are retained. The original yearly files are preserved losslessly in [data/2 yearly.zip](data/2%20yearly.zip). Each extracted CSV exceeds GitHub's 100 MB per-file limit; `tools/prepare_data.py` restores exact original sizes and SHA-256 hashes. No sampling or lossy compression is used.
 - The consolidated workbook's averages reproduce an **8-observation trailing mean**, including the current observation and partial initial windows. Missing calendar dates are shown as gaps, and original workbook averages are preserved.
+- A [missing-value audit](reports/MISSING_VALUES.md) separates original nulls from added calendar gaps. Notebook previews label gaps **Not listed**, without imputing values. Run `python tools/audit_missing_values.py` for the full check.
 - The raw reconstruction and consolidated workbook differ; the notebooks report their comparison rather than modifying either source to force agreement.
 - Sales are in **USD**, as confirmed by the student. Total costs include `CostPrice + LaborCost`; the notebook itemizes both.
 - `vader_lexicon.txt` and the hotel-review dataset are unrelated and excluded.
