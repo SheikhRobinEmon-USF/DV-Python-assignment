@@ -1,0 +1,16 @@
+[
+  {
+    "source": "data/2020 Cases only.csv",
+    "case_records": 1341647,
+    "source_year": 2020,
+    "missing_case_flags_retained": 0,
+    "unique_source_record_ids": 1341647
+  },
+  {
+    "source": "data/2021 Cases only.csv",
+    "case_records": 938226,
+    "source_year": 2021,
+    "missing_case_flags_retained": 3,
+    "unique_source_record_ids": 938226
+  }
+]

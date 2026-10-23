@@ -1,0 +1,28 @@
+{
+  "tested_utc": "2026-10-23T01:23:32.661318+00:00",
+  "tabpy_version": "2.16.0",
+  "transport": "HTTP to loopback only",
+  "scope": "Actual TabPy /evaluate execution on synthetic boundary values; not a Tableau Desktop connection or course product validation.",
+  "input_costs": [
+    74.99,
+    75,
+    75.01,
+    0.3,
+    0
+  ],
+  "input_prices": [
+    100,
+    100,
+    100,
+    0.4,
+    0
+  ],
+  "actual": [
+    "Lucrative",
+    "Lucrative",
+    "Not lucrative",
+    "Lucrative",
+    "Lucrative"
+  ],
+  "passed": true
+}

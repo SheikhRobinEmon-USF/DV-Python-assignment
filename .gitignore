@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.runtime/
+dist/
+*.log
+# Original case-level sources are retained losslessly in data/2 yearly.zip.
+# Each extracted CSV exceeds GitHub's 100 MB per-file limit.
+/data/2020 Cases only.csv
+/data/2021 Cases only.csv
+
+/data/derived/combined_case_records.csv
+/data/derived/*.inprogress
+.venv-tabpy/
+*.extracting

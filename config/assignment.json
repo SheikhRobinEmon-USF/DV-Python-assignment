@@ -1,0 +1,76 @@
+{
+  "covid": {
+    "path": "data/Combined.xlsx",
+    "sheets": {
+      "Pasco": {
+        "sheet": "Pasco",
+        "date": "Unnamed: 0",
+        "daily_cases": "Count of ObjectId (Pasco.csv)",
+        "moving_average": "Moving Average Pasco along Day of EventDate (Pasco.csv)"
+      },
+      "Hillsborough": {
+        "sheet": "Hillsborough",
+        "date": "Unnamed: 0",
+        "daily_cases": "Hillsborough",
+        "moving_average": "Moving Average Hillsborough along Day of Event Date"
+      }
+    },
+    "average_window_observations": 8,
+    "average_definition": "Trailing 8 available observations, current observation included; partial windows at the start. Inferred by reproducing all supplied values (Pasco rounded to 1 decimal).",
+    "source_average_verified": true
+  },
+  "raw_covid": {
+    "mode": "append_event_records",
+    "first": {
+      "path": "data/2020 Cases only.csv",
+      "columns": {
+        "county": "County",
+        "date": "EventDate",
+        "record_id": "ObjectId2",
+        "case_flag": "Case_"
+      },
+      "date_format": "%m/%d/%Y",
+      "schema_verified": true,
+      "expected_year": 2020,
+      "expected_rows": 1341647
+    },
+    "second": {
+      "path": "data/2021 Cases only.csv",
+      "columns": {
+        "county": "County",
+        "date": "EventDate",
+        "record_id": "ObjectId",
+        "case_flag": "Case_"
+      },
+      "date_format": "%m/%d/%Y",
+      "schema_verified": true,
+      "expected_year": 2021,
+      "expected_rows": 938226
+    },
+    "moving_average": {
+      "window": 8,
+      "min_periods": 1,
+      "basis": "observed_rows",
+      "definition_confirmed_by_instructor": false
+    },
+    "case_flag_policy": "Include all supplied case-only records; retain and report the 3 missing 2021 Case_ flags."
+  },
+  "sales": {
+    "path": "data/Simplified Car Sales Data.xlsx",
+    "sheet": "CarSalesData",
+    "columns": {
+      "country": "CountryName",
+      "total_sales": "SalePrice",
+      "purchase_cost": "CostPrice",
+      "labor_cost": "LaborCost"
+    },
+    "currency": "USD",
+    "cost_definition": "purchase_plus_labor",
+    "currency_basis": "User confirmed USD; source workbook has General cell formats."
+  },
+  "tableau": {
+    "path": "tableau/07_product_profitability.twbx",
+    "desktop_verified": false,
+    "verification_notes": ""
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "tested_utc": "2026-10-23T01:23:32.661318+00:00",
+  "inputs": {
+    "data/2018 Data.xlsx": {
+      "bytes": 13720,
+      "sha256": "d3968f50b7165e8c416596f3dba0656cbdedb3f8a4fb556453596915d1e59ec9"
+    },
+    "data/Simplified Car Sales Data.xlsx": {
+      "bytes": 22197,
+      "sha256": "dbadd134d68e03a07375cccf10273156063cd50790fc5c2bbbbd6ea7b3e6d4a2"
+    },
+    "data/2 yearly.zip": {
+      "bytes": 28666040,
+      "sha256": "ee6b5a4f4f6292488e3a80c34930d11641ec30885104061addfa7d391d6adb72"
+    },
+    "data/Combined.xlsx": {
+      "bytes": 219441,
+      "sha256": "75cc54fcc37f0dc13aae97b297e1dd9084e4fd23229792d0f924041a140dd6ac"
+    },
+    "data/2021 Cases only.csv": {
+      "bytes": 124852254,
+      "sha256": "b311a9e0290dfde3fbeb23afb4665a09fbd2e0de885063e6c4ecfc3448daedb6"
+    },
+    "data/2020 Cases only.csv": {
+      "bytes": 180989600,
+      "sha256": "7249233799148213cea40b2a2df3c7b8eda90419f8ebb2fe32a078cb18dc5c5e"
+    }
+  },
+  "originals_preserved": "Both full CSVs, exact original sizes and hashes; no sampling. ZIP retained unchanged.",
+  "case_records": 2279873,
+  "county_date_rows": 27625,
+  "county_categories": 68,
+  "source_years": [
+    2020,
+    2021
+  ],
+  "event_date_min": "2020-01-01",
+  "event_date_max": "2021-05-24",
+  "source_record_rows": [
+    1341647,
+    938226
+  ],
+  "missing_case_flags_retained": 3,
+  "county_totals": {
+    "Broward": 241293,
+    "Palm Beach": 144945
+  },
+  "cross_source_mismatches": {
+    "Hillsborough": 350,
+    "Pasco": 278
+  },
+  "cross_source_reason": "Not established by available file provenance. Sources are not silently reconciled.",
+  "notebooks": "All 5 executed successfully on actual course data; rendered figure output saved.",
+  "unittest": {
+    "command": "python -m unittest discover -s tests -v",
+    "tests_run": 16,
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tableau_desktop": "Not tested: original Module 3 workbook missing."
+}

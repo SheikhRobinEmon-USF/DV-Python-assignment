@@ -1,0 +1,32 @@
+{
+  "tested_utc": "2026-10-23T01:26:05.650875+00:00",
+  "procedure": "Extract Python deliverables ZIP into a different directory; restore both full original CSVs with SHA-256 verification; execute all five notebooks there using relative paths.",
+  "notebooks": [
+    {
+      "notebook": "01_unemployment_obesity.ipynb",
+      "executed_code_cells": 3,
+      "passed": true
+    },
+    {
+      "notebook": "02_pasco_covid.ipynb",
+      "executed_code_cells": 4,
+      "passed": true
+    },
+    {
+      "notebook": "03_hillsborough_covid.ipynb",
+      "executed_code_cells": 4,
+      "passed": true
+    },
+    {
+      "notebook": "04_european_car_sales.ipynb",
+      "executed_code_cells": 3,
+      "passed": true
+    },
+    {
+      "notebook": "05_reconstruct_covid_and_panels.ipynb",
+      "executed_code_cells": 5,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}
